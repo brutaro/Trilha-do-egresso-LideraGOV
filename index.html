@@ -8,15 +8,24 @@
     </script>
     <style>
         .mermaid {
-            zoom: 1.5; /* Ajuste o valor para aumentar ou diminuir o zoom */
-            width: 100%;
-            height: 800px; /* Ajuste a altura conforme necessário */
-            overflow: auto; /* Adiciona barras de rolagem, se necessário */
+            zoom: 1.5;
+            max-width: 900px; /* Aumentei a largura máxima */
+            height: auto;
+            margin: 0 auto;
+            display: block;
+        }
+        .page-header {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
-    <h1>Fluxograma Interativo</h1>
+    <header>
+        <h1 class="page-header">Trilha do egresso na Rede LideraGOV</h1>
+    </header>
     <div class="mermaid">
         graph LR
             %% Estilos personalizados para facilitar a visualização
