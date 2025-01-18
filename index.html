@@ -1,99 +1,94 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fluxograma</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-    .mermaid {
-      margin: 0 auto;
-      max-width: 100%;
-    }
-  </style>
+    <title>Fluxograma Interativo</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <style>
+        .mermaid {
+            zoom: 1.5; /* Ajuste o valor para aumentar ou diminuir o zoom */
+            width: 100%;
+            height: 800px; /* Ajuste a altura conforme necessário */
+            overflow: auto; /* Adiciona barras de rolagem, se necessário */
+        }
+    </style>
 </head>
 <body>
-  <div class="mermaid">
-    graph LR
-      %% Estilos personalizados para facilitar a visualização
-      style A fill:#f9f9f9,stroke:#333,stroke-width:2,color:#333
-      style B fill:#d1e7dd,stroke:#0f5132,stroke-width:2,color:#0f5132
-      style C fill:#ffe5d9,stroke:#842029,stroke-width:2,color:#842029
-      style D fill:#fef7cd,stroke:#664d03,stroke-width:2,color:#664d03
-      style E fill:#d4edda,stroke:#155724,stroke-width:2,color:#155724
-      style F fill:#cce5ff,stroke:#004085,stroke-width:2,color:#004085
-      style G fill:#f8d7da,stroke:#721c24,stroke-width:2,color:#721c24
-      style H fill:#fff3cd,stroke:#856404,stroke-width:2,color:#856404
-      style I fill:#d1ecf1,stroke:#0c5460,stroke-width:2,color:#0c5460
-      style J fill:#f9ebea,stroke:#7d3c98,stroke-width:2,color:#7d3c98
-      style K fill:#e8daef,stroke:#5b2c6f,stroke-width:2,color:#5b2c6f
-      style L fill:#d5f5e3,stroke:#1e8449,stroke-width:2,color:#1e8449
-      style M fill:#fef9e7,stroke:#7d6608,stroke-width:2,color:#7d6608
-      style N fill:#d6eaf8,stroke:#154360,stroke-width:2,color:#154360
-      style O fill:#fdebd0,stroke:#935116,stroke-width:2,color:#935116
-      style P fill:#eafaf1,stroke:#0e6655,stroke-width:2,color:#0e6655
-      style Q fill:#f5eef8,stroke:#6c3483,stroke-width:2,color:#6c3483
-      style R fill:#f9e79f,stroke:#7e5109,stroke-width:2,color:#7e5109
-      style S fill:#ebdef0,stroke:#6c3483,stroke-width:2,color:#6c3483
-      style T fill:#d4e6f1,stroke:#1b4f72,stroke-width:2,color:#1b4f72
-      style U fill:#d5dbdb,stroke:#515a5a,stroke-width:2,color:#515a5a
-      style V fill:#e8f8f5,stroke:#0e6251,stroke-width:2,color:#0e6251
-      style W fill:#fadbd8,stroke:#943126,stroke-width:2,color:#943126
-      style X fill:#fcf3cf,stroke:#7e5109,stroke-width:2,color:#7e5109
-      style Y fill:#fdebd0,stroke:#935116,stroke-width:2,color:#935116
-      style Z fill:#d4efdf,stroke:#186a3b,stroke-width:2,color:#186a3b
-      style AA fill:#f9e79f,stroke:#7d6608,stroke-width:2,color:#7d6608
-      style AB fill:#fad7a0,stroke:#935116,stroke-width:2,color:#935116
-      style AC fill:#d1f2eb,stroke:#117a65,stroke-width:2,color:#117a65
-      style AD fill:#f5b7b1,stroke:#922b21,stroke-width:2,color:#922b21
+    <h1>Fluxograma Interativo</h1>
+    <div class="mermaid">
+        graph LR
+            %% Estilos personalizados para facilitar a visualização
+            style A fill:#f9f9f9,stroke:#333,stroke-width:2,color:#333
+            style B fill:#d1e7dd,stroke:#0f5132,stroke-width:2,color:#0f5132
+            style C fill:#ffe5d9,stroke:#842029,stroke-width:2,color:#842029
+            style D fill:#fef7cd,stroke:#664d03,stroke-width:2,color:#664d03
+            style E fill:#d4edda,stroke:#155724,stroke-width:2,color:#155724
+            style F fill:#cce5ff,stroke:#004085,stroke-width:2,color:#004085
+            style G fill:#f8d7da,stroke:#721c24,stroke-width:2,color:#721c24
+            style H fill:#fff3cd,stroke:#856404,stroke-width:2,color:#856404
+            style I fill:#d1ecf1,stroke:#0c5460,stroke-width:2,color:#0c5460
+            style J fill:#f9ebea,stroke:#7d3c98,stroke-width:2,color:#7d3c98
+            style K fill:#e8daef,stroke:#5b2c6f,stroke-width:2,color:#5b2c6f
+            style L fill:#d5f5e3,stroke:#1e8449,stroke-width:2,color:#1e8449
+            style M fill:#fef9e7,stroke:#7d6608,stroke-width:2,color:#7d6608
+            style N fill:#d6eaf8,stroke:#154360,stroke-width:2,color:#154360
+            style O fill:#fdebd0,stroke:#935116,stroke-width:2,color:#935116
+            style P fill:#eafaf1,stroke:#0e6655,stroke-width:2,color:#0e6655
+            style Q fill:#f5eef8,stroke:#6c3483,stroke-width:2,color:#6c3483
+            style R fill:#f9e79f,stroke:#7e5109,stroke-width:2,color:#7e5109
+            style S fill:#ebdef0,stroke:#6c3483,stroke-width:2,color:#6c3483
+            style T fill:#d4e6f1,stroke:#1b4f72,stroke-width:2,color:#1b4f72
+            style U fill:#d5dbdb,stroke:#515a5a,stroke-width:2,color:#515a5a
+            style V fill:#e8f8f5,stroke:#0e6251,stroke-width:2,color:#0e6251
+            style W fill:#fadbd8,stroke:#943126,stroke-width:2,color:#943126
+            style X fill:#fcf3cf,stroke:#7e5109,stroke-width:2,color:#7e5109
+            style Y fill:#fdebd0,stroke:#935116,stroke-width:2,color:#935116
+            style Z fill:#d4efdf,stroke:#186a3b,stroke-width:2,color:#186a3b
+            style AA fill:#f9e79f,stroke:#7d6608,stroke-width:2,color:#7d6608
+            style AB fill:#fad7a0,stroke:#935116,stroke-width:2,color:#935116
+            style AC fill:#d1f2eb,stroke:#117a65,stroke-width:2,color:#117a65
+            style AD fill:#f5b7b1,stroke:#922b21,stroke-width:2,color:#922b21
 
-      %% Fluxograma principal
-      A[Início] --> B(Inscrição na Rede LideraGOV)
-      B --> C{E-mail de Boas-vindas}
-      C -- Sim --> D[Criação de Login e Senha]
-      D --> E[Primeiros Passos na Plataforma]
-      E --> F{Configuração do Perfil}
-      F -- Sim --> G[Acesso à Biblioteca e Repositório]
-      G --> H[Tutorial em Vídeo]
-      H --> I[Quizz Interativo]
-      I --> J{Integração e Networking}
-      J -- Sim --> K[Apresentação em Fóruns]
-      K --> L[Participação em Grupos de Discussão]
-      L --> M[Compartilhamento de Experiências]
-      M --> N[Convite para Eventos e Webinars]
-      N --> O{Participação em Eventos}
-      O -- Sim --> P[Acesso a Conteúdo Pós-Evento]
-      P --> Q[Acesso a Conteúdo Exclusivo]
-      Q --> R{Boletins Informativos}
-      R -- Sim --> S[Recomendações Personalizadas]
-      S --> T[Inscrição no Programa de Mentoria]
-      T --> U{Match Mentor-Mentorado}
-      U -- Sim --> V[Participação no Programa de Mentoria]
-      V --> W[Divulgação de Oportunidades de Capacitação]
-      W --> X{Reconhecimento de Conquistas}
-      X -- Sim --> Y[Chamadas para Projetos Colaborativos]
-      Y --> Z[Histórias de Sucesso]
-      Z --> AA[Pesquisas de Satisfação]
-      AA --> AB{Engajamento Contínuo}
-      AB -- Sim --> AC[Comunicação Regular e Personalizada]
-      AC --> AD[Fim]
-      C -- Não --> AD
-      F -- Não --> AD
-      J -- Não --> AD
-      O -- Não --> AD
-      R -- Não --> AD
-      U -- Não --> AD
-      X -- Não --> AD
-      AB -- Não --> AD
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-  <script>
-    mermaid.initialize({ startOnLoad: true });
-  </script>
+            %% Fluxograma principal
+            A[Início] --> B(Inscrição na Rede LideraGOV)
+            B --> C{E-mail de Boas-vindas}
+            C -- Sim --> D[Criação de Login e Senha]
+            D --> E[Primeiros Passos na Plataforma]
+            E --> F{Configuração do Perfil}
+            F -- Sim --> G[Acesso à Biblioteca e Repositório]
+            G --> H[Tutorial em Vídeo]
+            H --> I[Quizz Interativo]
+            I --> J{Integração e Networking}
+            J -- Sim --> K[Apresentação em Fóruns]
+            K --> L[Participação em Grupos de Discussão]
+            L --> M[Compartilhamento de Experiências]
+            M --> N[Convite para Eventos e Webinars]
+            N --> O{Participação em Eventos}
+            O -- Sim --> P[Acesso a Conteúdo Pós-Evento]
+            P --> Q[Acesso a Conteúdo Exclusivo]
+            Q --> R{Boletins Informativos}
+            R -- Sim --> S[Recomendações Personalizadas]
+            S --> T[Inscrição no Programa de Mentoria]
+            T --> U{Match Mentor-Mentorado}
+            U -- Sim --> V[Participação no Programa de Mentoria]
+            V --> W[Divulgação de Oportunidades de Capacitação]
+            W --> X{Reconhecimento de Conquistas}
+            X -- Sim --> Y[Chamadas para Projetos Colaborativos]
+            Y --> Z[Histórias de Sucesso]
+            Z --> AA[Pesquisas de Satisfação]
+            AA --> AB{Engajamento Contínuo}
+            AB -- Sim --> AC[Comunicação Regular e Personalizada]
+            AC --> AD[Fim]
+            C -- Não --> AD
+            F -- Não --> AD
+            J -- Não --> AD
+            O -- Não --> AD
+            R -- Não --> AD
+            U -- Não --> AD
+            X -- Não --> AD
+            AB -- Não --> AD
+    </div>
 </body>
 </html>
