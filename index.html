@@ -14,10 +14,7 @@
       margin: 0; 
       padding: 0; 
       font-family: sans-serif;
-      /* Mantemos overflow em hidden para que a rolagem
-         seja controlada manualmente e, ao mesmo tempo,
-         evitamos scrollbar na janela principal */
-      overflow: hidden;
+      overflow: hidden; /* Removemos o scrollbar do body */
       user-select: none; /* Evita seleção de texto ao arrastar */
     }
     
@@ -28,16 +25,16 @@
       font-size: 50%;
     }
 
-    /* Container externo para permitir rolagem e zoom */
+    /* Container externo (scroll) para permitir rolagem e zoom */
     .outer-container {
       width: 100vw;
       height: 100vh;
-      overflow: auto; /* Precisamos permitir scroll para que o panning funcione */
+      overflow: auto; /* Precisamos permitir scroll para panning */
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      cursor: grab; /* Ícone de "mão" ao passar o mouse */
+      cursor: grab; /* Ícone de "mão" */
     }
 
     /* Cursor "grabbing" enquanto arrasta */
@@ -151,14 +148,16 @@
   </div>
 
   <script>
-    // Referências ao container de zoom e ao container externo
+    // Referências
     const zoomContainer = document.getElementById('zoomContainer');
     const outerContainer = document.getElementById('outerContainer');
-    let scaleFactor = 1; // Fator de zoom inicial
+    
+    let scaleFactor = 1;   // Fator de zoom inicial
 
     // Variáveis para arrastar (panning)
     let isMouseDown = false;
-    let startX, startY, scrollLeft, scrollTop;
+    let startX, startY;
+    let scrollLeft, scrollTop;
 
     // --------------------------------------------------------
     // Zoom com a roda do mouse
@@ -203,19 +202,22 @@
       }
     }, { passive: false });
 
+
     // --------------------------------------------------------
     // Panning usando clique esquerdo e arraste
     // --------------------------------------------------------
     outerContainer.addEventListener('mousedown', (e) => {
-      if (e.button !== 0) return; // Permite apenas clique esquerdo
+      if (e.button !== 0) return; // Apenas clique esquerdo
       isMouseDown = true;
       outerContainer.classList.add('dragging');
 
-      // Posição inicial do mouse
-      startX = e.pageX - outerContainer.offsetLeft;
-      startY = e.pageY - outerContainer.offsetTop;
+      // Obter a posição atual do container e do mouse
+      const rect = outerContainer.getBoundingClientRect();
+      // Guardar cliente X/Y ao apertar o mouse
+      startX = e.clientX;
+      startY = e.clientY;
 
-      // Posição inicial do scroll
+      // Guardar as posições iniciais de scroll
       scrollLeft = outerContainer.scrollLeft;
       scrollTop = outerContainer.scrollTop;
 
@@ -236,13 +238,11 @@
       if (!isMouseDown) return;
       e.preventDefault();
 
-      // Distância percorrida pelo mouse
-      const x = e.pageX - outerContainer.offsetLeft;
-      const y = e.pageY - outerContainer.offsetTop;
-      const walkX = x - startX;
-      const walkY = y - startY;
+      // Distância percorrida pelo mouse desde o "mousedown"
+      const walkX = e.clientX - startX;
+      const walkY = e.clientY - startY;
 
-      // Atualiza scroll conforme a movimentação
+      // Atualiza scroll, invertendo o sinal para "arrastar" corretamente
       outerContainer.scrollLeft = scrollLeft - walkX;
       outerContainer.scrollTop = scrollTop - walkY;
     });
