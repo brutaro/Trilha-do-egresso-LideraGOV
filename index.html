@@ -14,7 +14,11 @@
       margin: 0; 
       padding: 0; 
       font-family: sans-serif;
-      overflow: hidden; /* Retirar barra de rolagem do corpo */
+      /* Mantemos overflow em hidden para que a rolagem
+         seja controlada manualmente e, ao mesmo tempo,
+         evitamos scrollbar na janela principal */
+      overflow: hidden;
+      user-select: none; /* Evita seleção de texto ao arrastar */
     }
     
     /* Título em 50% do tamanho padrão, centralizado */
@@ -24,31 +28,37 @@
       font-size: 50%;
     }
 
-    /* Container externo para manter o diagrama centralizado e permitir zoom */
+    /* Container externo para permitir rolagem e zoom */
     .outer-container {
       width: 100vw;
       height: 100vh;
-      overflow: auto;
+      overflow: auto; /* Precisamos permitir scroll para que o panning funcione */
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
+      cursor: grab; /* Ícone de "mão" ao passar o mouse */
+    }
+
+    /* Cursor "grabbing" enquanto arrasta */
+    .outer-container.dragging {
+      cursor: grabbing;
     }
 
     /* Container de zoom, que receberá o transform: scale() */
     .zoom-container {
       transform-origin: top left;
-      /* Por padrão, inicia com escala 1 */
       transform: scale(1);
-      transition: transform 0.1s ease-out; /* Suaviza o zoom */
+      transition: transform 0.1s ease-out;
     }
 
-    /* Container para o diagrama. Deixamos width: 100% para evitar corte ao aplicar zoom */
+    /* Container para o diagrama. Deixamos width: 100% para evitar corte ao aplicar zoom.
+       Definimos uma largura mínima para que não fique muito pequeno em telas grandes. */
     .mermaid-container {
       width: 100%;
-      min-width: 800px; /* Largura mínima para não ficar muito pequeno */
+      min-width: 800px;
       box-sizing: border-box;
-      overflow: visible; /* Permite que o diagrama "extravase" sem cortar */
+      overflow: visible;
       padding: 1rem;
     }
   </style>
@@ -141,17 +151,21 @@
   </div>
 
   <script>
-    // Lógica de zoom
+    // Referências ao container de zoom e ao container externo
     const zoomContainer = document.getElementById('zoomContainer');
     const outerContainer = document.getElementById('outerContainer');
-    let scaleFactor = 1;  // Fator de zoom inicial
+    let scaleFactor = 1; // Fator de zoom inicial
 
-    // Escuta evento de rolagem do mouse (wheel)
-    outerContainer.addEventListener('wheel', (event) => {
-      // Evita que a página role para cima/baixo
+    // Variáveis para arrastar (panning)
+    let isMouseDown = false;
+    let startX, startY, scrollLeft, scrollTop;
+
+    // --------------------------------------------------------
+    // Zoom com a roda do mouse
+    // --------------------------------------------------------
+    function handleZoom(event) {
       event.preventDefault();
 
-      // deltaY < 0 é "rolar para cima" (zoom in), deltaY > 0 é "rolar para baixo" (zoom out)
       if (event.deltaY < 0) {
         // zoom in
         scaleFactor += 0.1;
@@ -160,13 +174,78 @@
         scaleFactor -= 0.1;
       }
 
-      // Impede que o zoom vá além de certos limites
+      // Limites do zoom
       if (scaleFactor < 0.3) scaleFactor = 0.3;
       if (scaleFactor > 3) scaleFactor = 3;
 
       // Aplica o fator de zoom
       zoomContainer.style.transform = `scale(${scaleFactor})`;
+    }
+
+    // --------------------------------------------------------
+    // Rolagem horizontal com SHIFT + roda do mouse
+    // --------------------------------------------------------
+    function handleHorizontalScroll(event) {
+      event.preventDefault();
+      outerContainer.scrollLeft += event.deltaY;
+    }
+
+    // --------------------------------------------------------
+    // Evento de rolagem do mouse (wheel)
+    // --------------------------------------------------------
+    outerContainer.addEventListener('wheel', (event) => {
+      if (event.shiftKey) {
+        // Se SHIFT for pressionado, rola horizontalmente
+        handleHorizontalScroll(event);
+      } else {
+        // Caso contrário, faz zoom
+        handleZoom(event);
+      }
     }, { passive: false });
+
+    // --------------------------------------------------------
+    // Panning usando clique esquerdo e arraste
+    // --------------------------------------------------------
+    outerContainer.addEventListener('mousedown', (e) => {
+      if (e.button !== 0) return; // Permite apenas clique esquerdo
+      isMouseDown = true;
+      outerContainer.classList.add('dragging');
+
+      // Posição inicial do mouse
+      startX = e.pageX - outerContainer.offsetLeft;
+      startY = e.pageY - outerContainer.offsetTop;
+
+      // Posição inicial do scroll
+      scrollLeft = outerContainer.scrollLeft;
+      scrollTop = outerContainer.scrollTop;
+
+      e.preventDefault();
+    });
+
+    outerContainer.addEventListener('mouseleave', () => {
+      isMouseDown = false;
+      outerContainer.classList.remove('dragging');
+    });
+
+    outerContainer.addEventListener('mouseup', () => {
+      isMouseDown = false;
+      outerContainer.classList.remove('dragging');
+    });
+
+    outerContainer.addEventListener('mousemove', (e) => {
+      if (!isMouseDown) return;
+      e.preventDefault();
+
+      // Distância percorrida pelo mouse
+      const x = e.pageX - outerContainer.offsetLeft;
+      const y = e.pageY - outerContainer.offsetTop;
+      const walkX = x - startX;
+      const walkY = y - startY;
+
+      // Atualiza scroll conforme a movimentação
+      outerContainer.scrollLeft = scrollLeft - walkX;
+      outerContainer.scrollTop = scrollTop - walkY;
+    });
   </script>
 </body>
 </html>
